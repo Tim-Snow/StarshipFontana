@@ -28,7 +28,9 @@ private:
   SDL_Surface           * surface;
   bool                    is_running;
   shared_ptr<SFAsset>     player;
-
+  shared_ptr<SFAsset>     coin;
+  shared_ptr<SFAsset>     alien;
+  uint		  	  tickoftype;
   SFError OnInit();
 };
 #endif

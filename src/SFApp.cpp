@@ -3,10 +3,18 @@
 SFApp::SFApp() {
   is_running = true;
   surface    = SDL_GetVideoSurface();
-
+  tickoftype = 0;
   player     = make_shared<SFAsset>(SFASSET_PLAYER);
   auto player_pos = Point2(surface->w/2, 88.0f);
   player->SetPosition(player_pos);
+
+  alien     = make_shared<SFAsset>(SFASSET_ALIEN);
+  auto alien_pos = Point2(200, 200);
+  alien->SetPosition(alien_pos);
+
+  coin     = make_shared<SFAsset>(SFASSET_COIN);
+  auto coin_pos = Point2(surface->w/4, 100);
+  coin->SetPosition(coin_pos);
 }
 
 SFApp::~SFApp() {
@@ -22,9 +30,24 @@ void SFApp::OnEvent(SFEvent& event) {
   case SFEVENT_QUIT:
     is_running = false;
     break;
-  case SFEVENT_UPDATE:
+  case SFEVENT_UPDATE: 
     OnUpdateWorld();
     OnRender();
+    tickoftype=+1;
+    cout << tickoftype << endl;
+    break;
+  case SFEVENT_PLAYER_UP:
+	player->GoNorth();
+    break;
+
+  case SFEVENT_PLAYER_LEFT:
+	player->GoWest();
+    break;
+  case SFEVENT_PLAYER_RIGHT:
+	player->GoEast();
+    break;
+  case SFEVENT_PLAYER_DOWN:
+	player->GoSouth();
     break;
   }
 }
@@ -49,6 +72,8 @@ void SFApp::OnRender() {
 
   // draw the player
   player->OnRender(surface);
+  coin->OnRender(surface);
+  alien->OnRender(surface);
 
   // Switch the off-screen buffer to be on-screen
   SDL_Flip(surface);
