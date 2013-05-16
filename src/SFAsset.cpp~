@@ -42,7 +42,8 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   }
 
   if(SFASSET_PLAYER == type || SFASSET_COIN == type) {
-    SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
+    SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive))
+events.push;
   }
 }
 

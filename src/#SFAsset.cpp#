@@ -20,9 +20,6 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   case SFASSET_COIN:
     tmp_surf = IMG_Load("assets/coin.png");
     break;
-	case SFASSET_WALL:
-    tmp_surf = IMG_Load("assets/wall.png");
-    break;
   }
 
   if(!tmp_surf) {
@@ -38,10 +35,6 @@ SFAsset::SFAsset(SFASSETTYPE type) {
 
   // SFASSET_PROJECTILE and SFASSET_ALIEN are interested in SFEVENT_COLLISION
   if(SFASSET_PROJECTILE == type || SFASSET_ALIEN == type) {
-    SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
-  }
-
-  if(SFASSET_PLAYER == type || SFASSET_COIN == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
   }
 }
@@ -119,19 +112,15 @@ void SFAsset::GoEast() {
   }
 }
 
-void SFAsset::GoSouth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, -5.0f);
-  if(!(c.getX() > SDL_GetVideoSurface()->w)) {
-    bbox->centre.reset();
-    bbox->centre = make_shared<Vector2>(c);
-  }
-}
+
 
 void SFAsset::GoNorth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, 5.0f);
+  Vector2 c = *(bbox->centre) + Vector2(0.0f, 1.0f);
   bbox->centre.reset();
   bbox->centre = make_shared<Vector2>(c);
 }
+
+
 
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {
   return bbox->CollidesWith(other->bbox);

@@ -131,7 +131,7 @@ void SFApp::OnRender() {
 	for(auto a: aliens){
 		a->OnRender(surface);
 	}
-  player->OnRender(surface);
+  if(player->IsAlive()) {player->OnRender(surface);}
   // Switch the off-screen buffer to be on-screen
   SDL_Flip(surface);
 }
