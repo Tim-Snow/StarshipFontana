@@ -36,9 +36,9 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   // Initialise bounding box
   bbox = make_shared<SFBoundingBox>(SFBoundingBox(Vector2(0.0f, 0.0f), sprite->w, sprite->h));
 
- /* if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
+  if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
-  }*/
+  }
  
 }
 
@@ -99,6 +99,7 @@ void SFAsset::OnRender(SDL_Surface * level) {
   SDL_BlitSurface(sprite, NULL, level, &rect);
 }
 
+
 void SFAsset::GoWest() {
   Vector2 c = *(bbox->centre) + Vector2(-5.0f, 0.0f);
   if(!(c.getX() < 0)) {
@@ -124,7 +125,7 @@ void SFAsset::GoSouth() {
 }
 
 void SFAsset::GoNorth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, 5.0f);
+  Vector2 c += *(bbox->centre) + Vector2(0.0f, 5.0f);
   bbox->centre.reset();
   bbox->centre = make_shared<Vector2>(c);
 }

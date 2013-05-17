@@ -4,10 +4,7 @@
  * Effectively wraps an SDL_Event in our custom event type.
  */
 SFEvent::SFEvent(const SDL_Event & event) {
-bool keys[323] = {false};
-if(keys[SDLK_LEFT]){
-code= SFEVENT_PLAYER_LEFT;
-}
+bool keys[4] = {0,0,0,0};
   switch (event.type) {
   case SDL_QUIT:
     code = SFEVENT_QUIT;
@@ -18,20 +15,17 @@ code= SFEVENT_PLAYER_LEFT;
   case SDL_KEYDOWN:
     switch (event.key.keysym.sym) {
     case SDLK_LEFT:
-      keys[event.key.keysym.sym] = true;
-      code = SFEVENT_PLAYER_LEFT;
+      keys[0]=1;
+      std::cout << keys[0];
       break;
     case SDLK_RIGHT:
-      keys[event.key.keysym.sym] = true;
-      code = SFEVENT_PLAYER_RIGHT;
+      keys[1]=1;
       break;
     case SDLK_UP:
-      keys[event.key.keysym.sym] = true;
-      code = SFEVENT_PLAYER_UP;
+      keys[2]=1;
       break;
     case SDLK_DOWN:
-      keys[event.key.keysym.sym] = true;
-      code = SFEVENT_PLAYER_DOWN;
+      keys[3]=1;
       break;
     case SDLK_SPACE:
       code = SFEVENT_FIRE;
@@ -43,23 +37,34 @@ code= SFEVENT_PLAYER_LEFT;
   case SDL_KEYUP:
     switch (event.key.keysym.sym) {
     case SDLK_LEFT:
-      keys[event.key.keysym.sym] = false;
+      keys[0]=0;
       break;
     case SDLK_RIGHT:
-      keys[event.key.keysym.sym] = false;
+      keys[1]=0;
       break;
     case SDLK_UP:
-      keys[event.key.keysym.sym] = false;
+      keys[2]=0;
       break;
     case SDLK_DOWN:
-      keys[event.key.keysym.sym] = false;
+      keys[3]=0;
       break;
     }
-    break;
+   break;
   default:
     code = SFEVENT_NULL;
     break;
   }
+}
+SFEVENT SFEvent::Movement() {
+  if(keys[0]==1){
+  return SFEVENT_PLAYER_LEFT;}
+  if(keys[1]==1){
+  return SFEVENT_PLAYER_RIGHT;}
+  if(keys[2]==1){
+  return SFEVENT_PLAYER_UP;}
+  if(keys[3]==1){
+  return SFEVENT_PLAYER_DOWN;} else 
+  return code;
 }
 
 SFEVENT SFEvent::GetCode() {

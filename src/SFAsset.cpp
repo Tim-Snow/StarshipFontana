@@ -99,6 +99,7 @@ void SFAsset::OnRender(SDL_Surface * level) {
   SDL_BlitSurface(sprite, NULL, level, &rect);
 }
 
+
 void SFAsset::GoWest() {
   Vector2 c = *(bbox->centre) + Vector2(-5.0f, 0.0f);
   if(!(c.getX() < 0)) {

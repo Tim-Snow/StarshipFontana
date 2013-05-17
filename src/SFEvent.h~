@@ -18,9 +18,10 @@ class SFEvent {
 public:
   SFEvent(const SDL_Event &);
   SFEVENT GetCode();
+  SFEVENT Movement();
 private:
   SFEVENT code;
-  bool SFEVENT keys[];
+  bool keys[];
 };
   
 #endif

@@ -2,7 +2,7 @@
 #define SFEVENT_H
 
 #include <SDL/SDL.h>
-
+#include <iostream> 
 /**
  * Most of these SFEVENTs map onto game concepts apart from _NULL and _LAST.
  * SFEVENT_NULL means to do nothing.  It is created if we get an event that we do not recognise.
@@ -18,8 +18,10 @@ class SFEvent {
 public:
   SFEvent(const SDL_Event &);
   SFEVENT GetCode();
+  SFEVENT Movement();
 private:
   SFEVENT code;
+  bool keys[];
 };
   
 #endif

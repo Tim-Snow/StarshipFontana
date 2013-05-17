@@ -60,7 +60,7 @@ for(int i=0; i< 16; i++){
 	}
 }
 
-const int number_of_aliens = 2;
+const int number_of_aliens = 0;
   for(int i=0; i<number_of_aliens; i++) {
     auto alien = make_shared<SFAsset>(SFASSET_ALIEN);
     auto pos   = Point2(120+(400*i), 430.0f);
@@ -77,12 +77,14 @@ SFApp::~SFApp() {
  * These are timer or keyboard events.
  */
 void SFApp::OnEvent(SFEvent& event) {
+
   SFEVENT the_event = event.GetCode();
+  SFEVENT movement = event.Movement();
   switch (the_event) {
   case SFEVENT_QUIT:
     is_running = false;
     break;
-  case SFEVENT_UPDATE: 
+  case SFEVENT_UPDATE:
     OnUpdateWorld();
     OnRender();
     break;
@@ -91,6 +93,7 @@ void SFApp::OnEvent(SFEvent& event) {
     break;
   case SFEVENT_PLAYER_LEFT:
 	player->GoWest();
+  std::cout << "left pressed";
     break;
   case SFEVENT_PLAYER_RIGHT:
 	player->GoEast();
