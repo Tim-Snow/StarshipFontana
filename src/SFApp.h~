@@ -27,13 +27,8 @@ public:
 private:
   SDL_Surface           * surface;
   bool                    is_running;
-  char		 	  map_array[16][12];
-  shared_ptr<SFAsset>     wall1;
-  shared_ptr<SFAsset>     wall2;
-  shared_ptr<SFAsset>     wall3;
-  shared_ptr<SFAsset>     wall4;
-  shared_ptr<SFAsset>     wall5;
-  shared_ptr<SFAsset>     wall6;
+  char		 	  map_array[16][16];
+  shared_ptr<SFAsset>     wall;
   shared_ptr<SFAsset>     player;
   shared_ptr<SFAsset>     coin;
   shared_ptr<SFAsset>     alien;

@@ -36,14 +36,10 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   // Initialise bounding box
   bbox = make_shared<SFBoundingBox>(SFBoundingBox(Vector2(0.0f, 0.0f), sprite->w, sprite->h));
 
-  // SFASSET_PROJECTILE and SFASSET_ALIEN are interested in SFEVENT_COLLISION
-  if(SFASSET_PROJECTILE == type || SFASSET_ALIEN == type) {
+  if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
   }
-
-  if(SFASSET_PLAYER == type || SFASSET_COIN == type) {
-    SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
-  }
+ 
 }
 
 SFAsset::SFAsset(const SFAsset& a) {

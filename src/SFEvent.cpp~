@@ -20,7 +20,7 @@ code= SFEVENT_PLAYER_LEFT;
     case SDLK_LEFT:
       keys[event.key.keysym.sym] = true;
       code = SFEVENT_PLAYER_LEFT;
-      break;
+      
     case SDLK_RIGHT:
       keys[event.key.keysym.sym] = true;
       code = SFEVENT_PLAYER_RIGHT;

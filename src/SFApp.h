@@ -27,7 +27,7 @@ public:
 private:
   SDL_Surface           * surface;
   bool                    is_running;
-  char		 	  map_array[16][12];
+  char		 	  map_array[16][16];
   shared_ptr<SFAsset>     wall;
   shared_ptr<SFAsset>     player;
   shared_ptr<SFAsset>     coin;
@@ -35,7 +35,6 @@ private:
   list<shared_ptr<SFAsset> > walls;
   list<shared_ptr<SFAsset> > coins;
   list<shared_ptr<SFAsset> > aliens;
-  uint		  	  tickoftype;
   SFError OnInit();
 };
 #endif
