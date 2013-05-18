@@ -86,13 +86,13 @@ void SFApp::OnEvent(SFEvent& event) {
   case SFEVENT_UPDATE:
     OnUpdateWorld();
     OnRender();
+event.Movement();
     break;
   case SFEVENT_PLAYER_UP:
 	player->GoNorth();
     break;
-  case SFEVENT_PLAYER_LEFT:
+  case 3:
 	player->GoWest();
-  std::cout << "left pressed";
     break;
   case SFEVENT_PLAYER_RIGHT:
 	player->GoEast();

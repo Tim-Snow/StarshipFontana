@@ -21,7 +21,7 @@ public:
   SFEVENT Movement();
 private:
   SFEVENT code;
-  bool keys[];
+  Uint8* keys[];
 };
   
 #endif
