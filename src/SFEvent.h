@@ -18,7 +18,6 @@ class SFEvent {
 public:
   SFEvent(const SDL_Event &);
   SFEVENT GetCode();
-  SFEVENT Movement();
 private:
   SFEVENT code;
   Uint8* keys[];

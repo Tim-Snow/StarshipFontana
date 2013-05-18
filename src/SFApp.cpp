@@ -85,7 +85,6 @@ void SFApp::OnEvent(SFEvent& event) {
     break;
   case SFEVENT_UPDATE:
     OnUpdateWorld();
-    event.Movement();
     OnRender();
     break;
   case SFEVENT_PLAYER_UP:
@@ -115,7 +114,7 @@ int SFApp::OnExecute() {
 }
 
 void SFApp::OnUpdateWorld() {
-  Point2 p = player->GetPosition();
+ /* Point2 p = player->GetPosition();
   int playerx = p.getX();
   int playery = p.getY();
 
@@ -130,32 +129,13 @@ void SFApp::OnUpdateWorld() {
     a->GoSouth();
    } else { a->GoNorth(); }
   }
+*/
 
-  for(auto c : coins){
+for(auto c : coins){//coin collision
     if(player->CollidesWith(c)){
-		  SFEventDispacher::GetInstance().RaiseAndDispach(c->GetId(), SFEVENT_COLLISION);
-      
+		  SFEventDispacher::GetInstance().RaiseAndDispach(c->GetId(), SFEVENT_COLLISION);  
     }
   }
-  for( auto a : aliens){
-    if(player->CollidesWith(a)){
-      std::cout << "You Lose!" << endl;
-      is_running = false;
-    }
-  }
-  for( auto w : walls){
-
-    if(playerx-15<0){
-      playerx=0;
-    }
-    if(playery-15<0){
-      playery=0;
-    }
-      
-    
-  }
-
-
   list<shared_ptr<SFAsset>> tmp;
   for(auto c : coins) {
     if(c->IsAlive()){
@@ -163,24 +143,24 @@ void SFApp::OnUpdateWorld() {
     }
   }
   coins.clear();
-  coins = list<shared_ptr<SFAsset>>(tmp);  
+  coins = list<shared_ptr<SFAsset>>(tmp); 
+  
 }
 
 void SFApp::OnRender() {
   // clear the surface
   SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 8, 54, 129) );
-
-  // draw the player
+ 
     for(auto w: walls){
-	w->OnRender(surface);
-	}
+	    w->OnRender(surface);
+	  }
     for(auto c: coins) {
     	if(c->IsAlive()) {c->OnRender(surface);}
   	}
     for(auto a: aliens){
-	if(a->IsAlive()) {a->OnRender(surface);}
-	}
-  player->OnRender(surface);
+	    if(a->IsAlive()) {a->OnRender(surface);}
+	  }
+    player->OnRender(surface);
   // Switch the off-screen buffer to be on-screen
-  SDL_Flip(surface);
+    SDL_Flip(surface);
 }

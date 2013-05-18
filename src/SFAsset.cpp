@@ -101,7 +101,7 @@ void SFAsset::OnRender(SDL_Surface * level) {
 
 
 void SFAsset::GoWest() {
-  Vector2 c = *(bbox->centre) + Vector2(-5.0f, 0.0f);
+  Vector2 c = *(bbox->centre) + Vector2(-1.0f, 0.0f);
   if(!(c.getX() < 0)) {
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
@@ -109,7 +109,7 @@ void SFAsset::GoWest() {
 }
 
 void SFAsset::GoEast() {
-  Vector2 c = *(bbox->centre) + Vector2(5.0f, 0.0f);
+  Vector2 c = *(bbox->centre) + Vector2(1.0f, 0.0f);
   if(!(c.getX() > SDL_GetVideoSurface()->w)) {
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
@@ -117,7 +117,7 @@ void SFAsset::GoEast() {
 }
 
 void SFAsset::GoSouth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, -5.0f);
+  Vector2 c = *(bbox->centre) + Vector2(0.0f, -1.0f);
   if(!(c.getX() > SDL_GetVideoSurface()->w)) {
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
@@ -125,7 +125,7 @@ void SFAsset::GoSouth() {
 }
 
 void SFAsset::GoNorth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, 5.0f);
+  Vector2 c = *(bbox->centre) + Vector2(0.0f, 1.0f);
   bbox->centre.reset();
   bbox->centre = make_shared<Vector2>(c);
 }
