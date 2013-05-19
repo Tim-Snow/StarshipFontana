@@ -100,34 +100,36 @@ void SFAsset::OnRender(SDL_Surface * level) {
 }
 
 
-void SFAsset::GoWest() {
-  Vector2 c = *(bbox->centre) + Vector2(-1.0f, 0.0f);
-  if(!(c.getX() < 0)) {
+int SFAsset::GoWest(int xVel, int yVel) {
+  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+  if(!(c.getX() < sprite->w/2)) {
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
   }
 }
 
-void SFAsset::GoEast() {
-  Vector2 c = *(bbox->centre) + Vector2(1.0f, 0.0f);
-  if(!(c.getX() > SDL_GetVideoSurface()->w)) {
+int SFAsset::GoEast(int xVel, int yVel) {
+  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+  if(!(c.getX() > SDL_GetVideoSurface()->w-sprite->w/2)) {
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
   }
 }
 
-void SFAsset::GoSouth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, -1.0f);
-  if(!(c.getX() > SDL_GetVideoSurface()->w)) {
+int SFAsset::GoSouth(int xVel, int yVel) {
+  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+  if(!(c.getY() < 40)) {  
     bbox->centre.reset();
     bbox->centre = make_shared<Vector2>(c);
   }
 }
 
-void SFAsset::GoNorth() {
-  Vector2 c = *(bbox->centre) + Vector2(0.0f, 1.0f);
+int SFAsset::GoNorth(int xVel, int yVel) {
+  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+if(!(c.getY() > SDL_GetVideoSurface()->h+sprite->h/2)) {
   bbox->centre.reset();
   bbox->centre = make_shared<Vector2>(c);
+  }
 }
 
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {

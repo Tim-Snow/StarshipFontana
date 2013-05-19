@@ -35,10 +35,10 @@ public:
   virtual Point2    GetPosition();
   virtual SFAssetId GetId();
   virtual void      OnRender(SDL_Surface *);
-  virtual void      GoEast();
-  virtual void      GoWest();
-  virtual void      GoNorth();
-  virtual void 	    GoSouth();
+  virtual int       GoEast(int xVel, int yVel);
+  virtual int       GoWest(int xVel, int yVel);
+  virtual int       GoNorth(int xVel, int yVel);
+  virtual int 	    GoSouth(int xVel, int yVel);
   virtual void      SetNotAlive();
   virtual bool      IsAlive();
 

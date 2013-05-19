@@ -21,6 +21,7 @@ public:
   virtual ~SFApp();
   void    OnEvent(SFEvent &);
   int     OnExecute();
+  void    OnMove();
   void    OnUpdateWorld();
   void    OnRender();
 
@@ -35,7 +36,6 @@ private:
   list<shared_ptr<SFAsset> > walls;
   list<shared_ptr<SFAsset> > coins;
   list<shared_ptr<SFAsset> > aliens;
-  uint		  	  tickoftype;
   SFError OnInit();
 };
 #endif

@@ -12,6 +12,7 @@ SFApp::SFApp() {
   player->SetPosition(player_pos);
 
 
+
 ifstream file("assets/map.txt", ios::in);
 char map_array[16][16];
 
@@ -77,7 +78,8 @@ SFApp::~SFApp() {
  * These are timer or keyboard events.
  */
 void SFApp::OnEvent(SFEvent& event) {
-
+  int xVel = event.getX();
+  int yVel = event.getY();
   SFEVENT the_event = event.GetCode();
   switch (the_event) {
   case SFEVENT_QUIT:
@@ -87,18 +89,18 @@ void SFApp::OnEvent(SFEvent& event) {
     OnUpdateWorld();
     OnRender();
     break;
-  case SFEVENT_PLAYER_UP:
-	player->GoNorth();
-    break;
-  case SFEVENT_PLAYER_LEFT:
-	player->GoWest();
-    break;
-  case SFEVENT_PLAYER_RIGHT:
-	player->GoEast();
-    break;
-  case SFEVENT_PLAYER_DOWN:
-	player->GoSouth();
-    break;
+      case SFEVENT_PLAYER_LEFT:
+        player->GoWest(xVel, yVel);
+        break;
+      case SFEVENT_PLAYER_RIGHT:
+        player->GoEast(xVel, yVel);
+        break;
+      case SFEVENT_PLAYER_UP:
+        player->GoNorth(xVel, yVel);
+        break;
+      case SFEVENT_PLAYER_DOWN:
+        player->GoSouth(xVel, yVel);
+        break;
   }
 }
 
@@ -114,10 +116,14 @@ int SFApp::OnExecute() {
 }
 
 void SFApp::OnUpdateWorld() {
- /* Point2 p = player->GetPosition();
+
+ Point2 p = player->GetPosition();
+  
   int playerx = p.getX();
   int playery = p.getY();
 
+ //if(up==true&&
+/*
   for(auto a : aliens){
   Point2 al = a->GetPosition();
   int alienx = al.getX();
@@ -129,8 +135,14 @@ void SFApp::OnUpdateWorld() {
     a->GoSouth();
    } else { a->GoNorth(); }
   }
-*/
 
+for(auto w : walls){
+    if(player->CollidesWith(w)){ 
+      if(playerx+
+      
+    }
+  }
+*/
 for(auto c : coins){//coin collision
     if(player->CollidesWith(c)){
 		  SFEventDispacher::GetInstance().RaiseAndDispach(c->GetId(), SFEVENT_COLLISION);  
