@@ -21,9 +21,10 @@ public:
   virtual ~SFApp();
   void    OnEvent(SFEvent &);
   int     OnExecute();
-  void    OnMove();
   void    OnUpdateWorld();
   void    OnRender();
+  extern int xVel;
+  extern int yVel;
 
 private:
   SDL_Surface           * surface;

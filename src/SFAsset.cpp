@@ -39,7 +39,6 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
   }
- 
 }
 
 SFAsset::SFAsset(const SFAsset& a) {
@@ -80,6 +79,7 @@ Point2 SFAsset::GetPosition() {
   return Point2(bbox->centre->getX(), bbox->centre->getY());
 }
 
+
 SFAssetId SFAsset::GetId() {
   return id;
 }
@@ -100,7 +100,7 @@ void SFAsset::OnRender(SDL_Surface * level) {
 }
 
 
-int SFAsset::GoWest(int xVel, int yVel) {
+int SFAsset::GoDir(int xVel, int yVel) {
   Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
   if(!(c.getX() < sprite->w/2)) {
     bbox->centre.reset();
@@ -108,29 +108,6 @@ int SFAsset::GoWest(int xVel, int yVel) {
   }
 }
 
-int SFAsset::GoEast(int xVel, int yVel) {
-  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
-  if(!(c.getX() > SDL_GetVideoSurface()->w-sprite->w/2)) {
-    bbox->centre.reset();
-    bbox->centre = make_shared<Vector2>(c);
-  }
-}
-
-int SFAsset::GoSouth(int xVel, int yVel) {
-  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
-  if(!(c.getY() < 40)) {  
-    bbox->centre.reset();
-    bbox->centre = make_shared<Vector2>(c);
-  }
-}
-
-int SFAsset::GoNorth(int xVel, int yVel) {
-  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
-if(!(c.getY() > SDL_GetVideoSurface()->h+sprite->h/2)) {
-  bbox->centre.reset();
-  bbox->centre = make_shared<Vector2>(c);
-  }
-}
 
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {
   return bbox->CollidesWith(other->bbox);

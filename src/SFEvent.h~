@@ -18,15 +18,15 @@ class SFEvent {
 public:
   SFEvent(const SDL_Event &);
   SFEVENT GetCode();
-  int getX(int x);
-  int getY(int y);
-  int xVel;
-  int yVel;
+  int getX();
+  int getY();
   int timer;
   bool right;
   bool left;
   bool up;
   bool down;
+  int xVel;
+  int yVel;
 
 private:
   SFEVENT code;

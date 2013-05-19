@@ -89,17 +89,8 @@ void SFApp::OnEvent(SFEvent& event) {
     OnUpdateWorld();
     OnRender();
     break;
-      case SFEVENT_PLAYER_LEFT:
-        player->GoWest(xVel, yVel);
-        break;
-      case SFEVENT_PLAYER_RIGHT:
-        player->GoEast(xVel, yVel);
-        break;
-      case SFEVENT_PLAYER_UP:
-        player->GoNorth(xVel, yVel);
-        break;
-      case SFEVENT_PLAYER_DOWN:
-        player->GoSouth(xVel, yVel);
+      case SFEVENT_PLAYER_MOVE:
+        player->GoDir(xVel, yVel);
         break;
   }
 }
@@ -117,32 +108,40 @@ int SFApp::OnExecute() {
 
 void SFApp::OnUpdateWorld() {
 
- Point2 p = player->GetPosition();
-  
-  int playerx = p.getX();
-  int playery = p.getY();
-
- //if(up==true&&
-/*
-  for(auto a : aliens){
-  Point2 al = a->GetPosition();
-  int alienx = al.getX();
-  int alieny = al.getY();
-	 if(alienx > playerx){
-     a->GoWest();
-   } else { a->GoEast(); }
-   if(alieny > playery){
-    a->GoSouth();
-   } else { a->GoNorth(); }
-  }
-
-for(auto w : walls){
-    if(player->CollidesWith(w)){ 
-      if(playerx+
-      
-    }
+/*  for(auto a : aliens){
+    Point2 al = a->GetPosition();
+    int alienx = al.getX();
+    int alieny = al.getY();
+	   if(alienx > playerx){
+       a->GoWest();
+     } else { a->GoEast(); }
+     if(alieny > playery){
+       a->GoSouth();
+     } else { a->GoNorth(); }
   }
 */
+/*Point2 p = player->GetPosition();
+int playerx = p.getX();
+int playery = p.getY();
+
+int pright = playerx + 20;
+int pleft = playerx-20;
+int ptop = playery+15;
+int pbot = playery-15;*/
+
+/*Point2 wallpos = w->GetPosition();
+int wallx = wallpos.getX();
+int wally = wallpos.getY();
+int wright = wallx+20;
+int wleft = wallx-20;
+int wtop = wally+15;
+int wbot = wally-15;*/
+for(auto w : walls){
+  if(player->CollidesWith(w)){
+ //   SFEventDispacher::GetInstance().RaiseAndDispach(w->GetId(), SFEVENT_COLLISION);
+        
+  }
+}
 for(auto c : coins){//coin collision
     if(player->CollidesWith(c)){
 		  SFEventDispacher::GetInstance().RaiseAndDispach(c->GetId(), SFEVENT_COLLISION);  
