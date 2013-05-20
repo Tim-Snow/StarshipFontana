@@ -23,7 +23,7 @@ public:
   void    OnEvent(SFEvent &);
   int     OnExecute();
   void    OnUpdateWorld();
-  void    OnRender();
+  void    OnRender(int);
   bool    collision;
   int     score;
   int     state;

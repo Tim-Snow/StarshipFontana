@@ -8,7 +8,6 @@ using namespace std;
 
 #include "SFCommon.h"
 #include "SFEvent.h"
-#include "SFState.h"
 #include "SFAsset.h"
 
 /**

@@ -15,7 +15,6 @@ using namespace std;
 #include "SDL_ttf.h"
 #include "SFCommon.h"
 #include "SFEvent.h"
-#include "SFState.h"
 #include "SFEventDispacher.h"
 #include "SFBoundingBox.h"
 

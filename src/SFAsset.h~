@@ -49,7 +49,6 @@ private:
   // (or we could use a std::shared_ptr with a custom Deleter, but
   // that's a little too much right now)
   SDL_Surface               * sprite;
-  SDL_Surface               * message
   shared_ptr<SFBoundingBox>   bbox;
   SFASSETTYPE                 type;
   SFAssetId                   id;
