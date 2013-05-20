@@ -9,7 +9,7 @@
  * SFEVENT_LAST marks the maximal element in the SFEVENT enumeration.  It is useful for creating
  *              the slots array in SFEventDispacher
  */
-enum SFEVENT {SFEVENT_NULL, SFEVENT_QUIT, SFEVENT_UPDATE, SFEVENT_FIRE, SFEVENT_COLLISION, SFEVENT_LAST, SFEVENT_PLAYER_MOVE};
+enum SFEVENT {SFEVENT_NULL, SFEVENT_INTRO, SFEVENT_WIN, SFEVENT_LOSE, SFEVENT_QUIT, SFEVENT_UPDATE, SFEVENT_FIRE, SFEVENT_COLLISION, SFEVENT_LAST, SFEVENT_PLAYER_MOVE};
 
 /**
  * Abstracts away from SDL_Event so that our game event management needs no SDL-specific code.

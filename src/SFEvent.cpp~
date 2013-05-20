@@ -49,9 +49,10 @@ int SFEvent::getX(){
   if(left==true){
     xVel=-2;
   }
-  else if(left==false&&right==false){
+  if(left==false&&right==false||left==true&&right==true){
     xVel=0;
   }
+
 return xVel;
 }
 
@@ -62,7 +63,7 @@ int SFEvent::getY(){
   if(down==true){
     yVel=-2;
   }
-  else if(up==false&&down==false){
+  else if(up==false&&down==false||up==true&&down==true){
     yVel=0;
   }
 return yVel;

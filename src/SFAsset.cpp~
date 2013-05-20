@@ -1,5 +1,6 @@
 #include "SFAsset.h"
 
+
 int SFAsset::SFASSETID=0;
 
 SFAsset::SFAsset(SFASSETTYPE type) {
@@ -102,7 +103,7 @@ void SFAsset::OnRender(SDL_Surface * level) {
 
 
 int SFAsset::GoDir(int xVel,int yVel, list<shared_ptr<SFAsset> > &walls) {
-bbox->centre.reset();
+
 Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
       bbox->centre.reset();
       bbox->centre = make_shared<Vector2>(c);

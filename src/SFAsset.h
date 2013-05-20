@@ -5,15 +5,17 @@
 #include <memory>
 #include <iostream>
 
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
 #include <sigc++/sigc++.h>
 
 using namespace std;
-
+#include "SDL_ttf.h"
 #include "SFCommon.h"
 #include "SFEvent.h"
+#include "SFState.h"
 #include "SFEventDispacher.h"
 #include "SFBoundingBox.h"
 

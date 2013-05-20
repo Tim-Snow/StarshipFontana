@@ -1,5 +1,6 @@
 #include "SFAsset.h"
 
+
 int SFAsset::SFASSETID=0;
 
 SFAsset::SFAsset(SFASSETTYPE type) {
@@ -40,6 +41,7 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
   }
+
 }
 
 SFAsset::SFAsset(const SFAsset& a) {

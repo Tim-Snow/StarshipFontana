@@ -8,6 +8,7 @@ using namespace std;
 
 #include "SFCommon.h"
 #include "SFEvent.h"
+#include "SFState.h"
 #include "SFAsset.h"
 
 /**
@@ -22,10 +23,12 @@ public:
   void    OnEvent(SFEvent &);
   int     OnExecute();
   void    OnUpdateWorld();
-  void    OnRender();
+  void    OnRender(int);
   bool    collision;
-
+  int     score;
+  int     state;
 private:
+
   SDL_Surface           * surface;
   bool                    is_running;
   char		 	  map_array[15][20];
