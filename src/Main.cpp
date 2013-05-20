@@ -20,6 +20,7 @@ Uint32 PushUpdateEvent(Uint32 interval, void *param) {
 }
 
 SFError InitGraphics() {
+  std::cout << "Press a direction to begin";
   Uint32 width = 640;
   Uint32 height = 480;
   Uint32 colour_depth = 16; // in bits

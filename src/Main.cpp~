@@ -7,7 +7,7 @@ using namespace std;  // So that we can write `vector` rather than `std::vector`
 #include "SFCommon.h"
 #include "SFApp.h"
 
-enum userEvents{UPDATE_EVENT, STATE_INTRO};
+enum userEvents{UPDATE_EVENT};
 
 Uint32 PushUpdateEvent(Uint32 interval, void *param) {
   SDL_Event event;
@@ -59,7 +59,7 @@ int main(int arc, char ** argv) {
   // Call the function "display" every delay milliseconds
   int delay = 1000/60; // 1000 milis in a second, divide by 60 - the framerate
   SDL_AddTimer(delay, PushUpdateEvent, NULL);
-
+  std::cout << "Press a direction to begin";
   // Start game loop
   sfapp->OnExecute();
 

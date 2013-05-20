@@ -80,6 +80,7 @@ void SFApp::OnEvent(SFEvent& event) {
           is_running = false;
           break;
         case SFEVENT_UPDATE:
+          std::cout << "Press a direction to begin";
           OnRender(0);
           break;
         case SFEVENT_PLAYER_MOVE:
@@ -204,7 +205,7 @@ void SFApp::OnRender(int x) {
   // clear the surface
 if(x==0){
   SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 8, 54, 129) );
-  SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, colour);
+  SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text);
 
 }
 if(x==1){
