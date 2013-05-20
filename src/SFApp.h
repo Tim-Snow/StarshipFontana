@@ -23,11 +23,12 @@ public:
   int     OnExecute();
   void    OnUpdateWorld();
   void    OnRender();
+  bool    collision;
 
 private:
   SDL_Surface           * surface;
   bool                    is_running;
-  char		 	  map_array[16][16];
+  char		 	  map_array[15][20];
   shared_ptr<SFAsset>     wall;
   shared_ptr<SFAsset>     player;
   shared_ptr<SFAsset>     coin;

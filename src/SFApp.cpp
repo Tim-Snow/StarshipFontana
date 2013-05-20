@@ -14,45 +14,45 @@ SFApp::SFApp() {
 
 
 ifstream file("assets/map.txt", ios::in);
-char map_array[16][16];
+char map_array[15][20];
 
 
 
 string line;
-for(int i=0; i< 16; i++){
+for(int i=0; i< 15; i++){
 file >> line;
-for(int j=0; j< 16; j++){
+for(int j=0; j< 20; j++){
 char c = line[j];
-map_array[15-i][j] = c;
+map_array[14-i][j] = c;
 std::cout << c;
 	}
 std::cout << endl;
 }
 std::cout << "this is what the array looks like" << endl;
-for(int i=0; i< 16; i++){
-	for(int j=0; j<16; j++){
+for(int i=0; i< 15; i++){
+	for(int j=0; j<20; j++){
 std::cout << map_array[i][j];
 }
 std::cout << endl;
 }
 
-for(int i=0; i< 16; i++){
-	for(int j=0; j<16; j++){
+for(int i=0; i< 15; i++){
+	for(int j=0; j<20; j++){
 		switch(map_array[i][j]) {
 		case '0':{}
 			break;
 		case '1': {
 			coin = make_shared<SFAsset>(SFASSET_COIN);
-			auto coin_pos = Point2(((40)*j)+20, ((30)*i)+45);
+			auto coin_pos = Point2(((32)*j)+15, ((32)*i)+48);
 			coin->SetPosition(coin_pos);
-      			coins.push_back(coin);
+      coins.push_back(coin);
 			break;
 			}
 		case '2':{
 			wall = make_shared<SFAsset>(SFASSET_WALL);
-			auto wall_pos = Point2(((40)*j)+20, ((30)*i)+45);
+			auto wall_pos = Point2(((32)*j)+15, ((32)*i)+48);
 			wall->SetPosition(wall_pos);
-    			walls.push_back(wall);
+      walls.push_back(wall);
 			break;
 			}
 		default:
@@ -61,13 +61,13 @@ for(int i=0; i< 16; i++){
 	}
 }
 
-const int number_of_aliens = 0;
+/*const int number_of_aliens = 0;
   for(int i=0; i<number_of_aliens; i++) {
     auto alien = make_shared<SFAsset>(SFASSET_ALIEN);
     auto pos   = Point2(120+(400*i), 430.0f);
     alien->SetPosition(pos);
     aliens.push_back(alien);
-  }
+  }*/
 }
 
 SFApp::~SFApp() {
@@ -80,6 +80,7 @@ SFApp::~SFApp() {
 void SFApp::OnEvent(SFEvent& event) {
   int xVel = event.getX();
   int yVel = event.getY();
+
   SFEVENT the_event = event.GetCode();
   switch (the_event) {
   case SFEVENT_QUIT:
@@ -90,8 +91,15 @@ void SFApp::OnEvent(SFEvent& event) {
     OnRender();
     break;
       case SFEVENT_PLAYER_MOVE:
-        player->GoDir(xVel, yVel);
+        player->GoDir(xVel, yVel, walls);       
         break;
+  }
+
+  for(auto w : walls){
+    if(player->CollidesWith(w)){
+      collision=true;
+      player->GoDir(-xVel, -yVel, walls);
+    }
   }
 }
 
@@ -107,41 +115,6 @@ int SFApp::OnExecute() {
 }
 
 void SFApp::OnUpdateWorld() {
-
-/*  for(auto a : aliens){
-    Point2 al = a->GetPosition();
-    int alienx = al.getX();
-    int alieny = al.getY();
-	   if(alienx > playerx){
-       a->GoWest();
-     } else { a->GoEast(); }
-     if(alieny > playery){
-       a->GoSouth();
-     } else { a->GoNorth(); }
-  }
-*/
-/*Point2 p = player->GetPosition();
-int playerx = p.getX();
-int playery = p.getY();
-
-int pright = playerx + 20;
-int pleft = playerx-20;
-int ptop = playery+15;
-int pbot = playery-15;*/
-
-/*Point2 wallpos = w->GetPosition();
-int wallx = wallpos.getX();
-int wally = wallpos.getY();
-int wright = wallx+20;
-int wleft = wallx-20;
-int wtop = wally+15;
-int wbot = wally-15;*/
-for(auto w : walls){
-  if(player->CollidesWith(w)){
- //   SFEventDispacher::GetInstance().RaiseAndDispach(w->GetId(), SFEVENT_COLLISION);
-        
-  }
-}
 for(auto c : coins){//coin collision
     if(player->CollidesWith(c)){
 		  SFEventDispacher::GetInstance().RaiseAndDispach(c->GetId(), SFEVENT_COLLISION);  
@@ -155,7 +128,20 @@ for(auto c : coins){//coin collision
   }
   coins.clear();
   coins = list<shared_ptr<SFAsset>>(tmp); 
-  
+
+/*  for(auto a : aliens){
+    Point2 al = a->GetPosition();
+    int alienx = al.getX();
+    int alieny = al.getY();
+	   if(alienx > playerx){
+       a->GoWest();
+     } else { a->GoEast(); }
+     if(alieny > playery){
+       a->GoSouth();
+     } else { a->GoNorth(); }
+  }
+*/
+ 
 }
 
 void SFApp::OnRender() {

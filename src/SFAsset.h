@@ -35,7 +35,7 @@ public:
   virtual Point2    GetPosition();
   virtual SFAssetId GetId();
   virtual void      OnRender(SDL_Surface *);
-  virtual int       GoDir(int xVel, int yVel);
+  virtual int       GoDir(int, int, std::list<shared_ptr<SFAsset> >&);
   virtual void      SetNotAlive();
   virtual bool      IsAlive();
 

@@ -36,15 +36,16 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   // Initialise bounding box
   bbox = make_shared<SFBoundingBox>(SFBoundingBox(Vector2(0.0f, 0.0f), sprite->w, sprite->h));
 
+
   if(SFASSET_COIN == type || SFASSET_PLAYER == type) {
     SFEventDispacher::GetInstance().RegisterInterest(id, SFEVENT_COLLISION, sigc::mem_fun(this, &SFAsset::SetNotAlive));
   }
 }
 
 SFAsset::SFAsset(const SFAsset& a) {
-  sprite = a.sprite;
-  bbox   = a.bbox;
-  type   = a.type;
+  sprite  = a.sprite;
+  bbox    = a.bbox;
+  type    = a.type;
 }
 
 SFAsset::~SFAsset() {
@@ -100,19 +101,16 @@ void SFAsset::OnRender(SDL_Surface * level) {
 }
 
 
-int SFAsset::GoDir(int xVel, int yVel) {
-  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
-  if(!(c.getX() < sprite->w/2)) {
-    bbox->centre.reset();
-    bbox->centre = make_shared<Vector2>(c);
-  }
-}
+int SFAsset::GoDir(int xVel,int yVel, list<shared_ptr<SFAsset> > &walls) {
 
+Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+      bbox->centre.reset();
+      bbox->centre = make_shared<Vector2>(c);
+}
 
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {
-  return bbox->CollidesWith(other->bbox);
+    return bbox->CollidesWith(other->bbox);
 }
-
 shared_ptr<SFBoundingBox> SFAsset::GetBoundingBox() {
   return bbox;
 }
