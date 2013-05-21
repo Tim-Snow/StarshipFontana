@@ -30,7 +30,10 @@ private:
 
   SDL_Surface           * surface;
   bool                    is_running;
-  char		 	  map_array[15][20];
+  char		 	              map_array[15][20];
+  shared_ptr<SFAsset>     lose;
+  shared_ptr<SFAsset>     win;
+  shared_ptr<SFAsset>     intro;
   shared_ptr<SFAsset>     wall;
   shared_ptr<SFAsset>     player;
   shared_ptr<SFAsset>     coin;

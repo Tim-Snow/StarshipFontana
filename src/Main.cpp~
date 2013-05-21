@@ -20,6 +20,7 @@ Uint32 PushUpdateEvent(Uint32 interval, void *param) {
 }
 
 SFError InitGraphics() {
+
   Uint32 width = 640;
   Uint32 height = 480;
   Uint32 colour_depth = 16; // in bits
@@ -35,6 +36,9 @@ SFError InitGraphics() {
   if (!(SDL_SetVideoMode(width, height, colour_depth, SDL_DOUBLEBUF))) {
     cerr << "Failed to initialise video mode: " << SDL_GetError() << endl;
     throw SF_ERROR_VIDEOMODE;
+  }
+  if (TTF_Init()==-1){
+    cerr << "Failed to init ttf";
   }
 
   SDL_WM_SetCaption("Starship Fontana", "Starship Fontana");
@@ -59,7 +63,7 @@ int main(int arc, char ** argv) {
   // Call the function "display" every delay milliseconds
   int delay = 1000/60; // 1000 milis in a second, divide by 60 - the framerate
   SDL_AddTimer(delay, PushUpdateEvent, NULL);
-  std::cout << "Press a direction to begin";
+
   // Start game loop
   sfapp->OnExecute();
 

@@ -9,6 +9,15 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   SDL_Surface * tmp_surf;
 
   switch (type) {
+  case SFASSET_LOSE:
+    tmp_surf = IMG_Load("assets/lose.png");
+    break;
+  case SFASSET_WIN:
+    tmp_surf = IMG_Load("assets/win.png");
+    break;
+  case SFASSET_INTRO:
+    tmp_surf = IMG_Load("assets/intro.png");
+    break;
   case SFASSET_PLAYER:
     tmp_surf = IMG_Load("assets/player.png");
     break;
@@ -30,10 +39,11 @@ SFAsset::SFAsset(SFASSETTYPE type) {
     cerr << "Could not load asset of type " << type << endl;
     throw SF_ERROR_LOAD_ASSET;
   }
-
   sprite = SDL_DisplayFormatAlpha(tmp_surf);
   SDL_FreeSurface(tmp_surf);
 
+  
+ 
   // Initialise bounding box
   bbox = make_shared<SFBoundingBox>(SFBoundingBox(Vector2(0.0f, 0.0f), sprite->w, sprite->h));
 
@@ -43,6 +53,7 @@ SFAsset::SFAsset(SFASSETTYPE type) {
   }
 
 }
+
 
 SFAsset::SFAsset(const SFAsset& a) {
   sprite  = a.sprite;
@@ -89,7 +100,7 @@ SFAssetId SFAsset::GetId() {
 
 void SFAsset::OnRender(SDL_Surface * level) {
   // 1. Get the SDL_Rect from SFBoundingBox
-  SDL_Rect rect;
+  SDL_Rect rect; 
 
   Vector2 gs = (*(bbox->centre) + (*(bbox->extent_x) * -1)) + (*(bbox->extent_y) * -1);
   Vector2 ss = GameSpaceToScreenSpace(gs);
@@ -97,22 +108,22 @@ void SFAsset::OnRender(SDL_Surface * level) {
   rect.y = ss.getY();
   rect.w = bbox->extent_x->getX() * 2;
   rect.h = bbox->extent_y->getY() * 2;
-
   // 2. Blit the sprite onto the level
   SDL_BlitSurface(sprite, NULL, level, &rect);
 }
 
 
-int SFAsset::GoDir(int xVel,int yVel, list<shared_ptr<SFAsset> > &walls) {
-
-Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
-      bbox->centre.reset();
-      bbox->centre = make_shared<Vector2>(c);
+int SFAsset::GoDir(int xVel,int yVel) {
+//moves the asset in the direction of xVel and yVel which are passed in
+  Vector2 c = *(bbox->centre) + Vector2(xVel, yVel);
+  bbox->centre.reset();
+  bbox->centre = make_shared<Vector2>(c);
 }
 
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {
     return bbox->CollidesWith(other->bbox);
 }
+
 shared_ptr<SFBoundingBox> SFAsset::GetBoundingBox() {
   return bbox;
 }

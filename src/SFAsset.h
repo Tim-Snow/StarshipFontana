@@ -12,7 +12,6 @@
 #include <sigc++/sigc++.h>
 
 using namespace std;
-#include "SDL_ttf.h"
 #include "SFCommon.h"
 #include "SFEvent.h"
 #include "SFEventDispacher.h"
@@ -24,8 +23,7 @@ using namespace std;
  * enum to mark the type of the SFAsset.  If we add more asset types then
  * the subclassing strategy becomes a better option.
  */
-enum SFASSETTYPE {SFASSET_DEAD, SFASSET_PLAYER, SFASSET_PROJECTILE, SFASSET_ALIEN, SFASSET_COIN, SFASSET_WALL};
-
+enum SFASSETTYPE {SFASSET_DEAD, SFASSET_PLAYER, SFASSET_PROJECTILE, SFASSET_ALIEN, SFASSET_COIN, SFASSET_LOSE, SFASSET_WIN, SFASSET_INTRO, SFASSET_WALL};
 class SFAsset {
 public:
   SFAsset(const SFASSETTYPE);
@@ -36,7 +34,7 @@ public:
   virtual Point2    GetPosition();
   virtual SFAssetId GetId();
   virtual void      OnRender(SDL_Surface *);
-  virtual int       GoDir(int, int, std::list<shared_ptr<SFAsset> >&);
+  virtual int       GoDir(int, int);
   virtual void      SetNotAlive();
   virtual bool      IsAlive();
 
@@ -46,7 +44,7 @@ private:
   // it would be nice if we could make this into a smart pointer,
   // but, because we need to call SDL_FreeSurface on it, we can't.
   // (or we could use a std::shared_ptr with a custom Deleter, but
-  // that's a little too much right now)
+  // that's a little too much right now
   SDL_Surface               * sprite;
   shared_ptr<SFBoundingBox>   bbox;
   SFASSETTYPE                 type;

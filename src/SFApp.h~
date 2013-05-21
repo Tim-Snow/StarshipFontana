@@ -8,7 +8,6 @@ using namespace std;
 
 #include "SFCommon.h"
 #include "SFEvent.h"
-#include "SFState.h"
 #include "SFAsset.h"
 
 /**
@@ -31,8 +30,19 @@ private:
 
   SDL_Surface           * surface;
   bool                    is_running;
-  char		 	  map_array[15][20];
+  char		 	              map_array[15][20];
+  shared_ptr<SFAsset>     lose;
+  shared_ptr<SFAsset>     win;
+  shared_ptr<SFAsset>     intro;
   shared_ptr<SFAsset>     wall;
+  shared_ptr<SFAsset>     wall1;
+  shared_ptr<SFAsset>     wallc1;
+  shared_ptr<SFAsset>     wallc2;
+  shared_ptr<SFAsset>     wallc3;
+  shared_ptr<SFAsset>     wallc4;
+  shared_ptr<SFAsset>     wall2;
+  shared_ptr<SFAsset>     wall3;
+
   shared_ptr<SFAsset>     player;
   shared_ptr<SFAsset>     coin;
   shared_ptr<SFAsset>     alien;
