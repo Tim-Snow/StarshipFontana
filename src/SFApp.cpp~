@@ -85,7 +85,7 @@ void SFApp::OnEvent(SFEvent& event) {
           is_running = false;
           break;
         case SFEVENT_UPDATE:
-          OnRender(0);
+          OnRender(3);
           break;
         case SFEVENT_PLAYER_MOVE:
           state=1;       
@@ -129,7 +129,6 @@ void SFApp::OnEvent(SFEvent& event) {
         is_running = false;
         break;
       case SFEVENT_UPDATE:
-        OnUpdateWorld();
         OnRender(3);
         break;
       }
