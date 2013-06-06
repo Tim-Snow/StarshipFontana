@@ -5,16 +5,6 @@ SFApp::SFApp() {
   is_running = true;
   surface    = SDL_GetVideoSurface();
   wall	     = make_shared<SFAsset>(SFASSET_WALL);
-  wall1	     = make_shared<SFAsset>(SFASSET_WALL_1);
-  wallc1	     = make_shared<SFAsset>(SFASSET_WALL_C1);
-  wallc2	     = make_shared<SFAsset>(SFASSET_WALL_C2);
-  wallc3	     = make_shared<SFAsset>(SFASSET_WALL_C3);
-  wallc4	     = make_shared<SFAsset>(SFASSET_WALL_C4);
-  wall2 	     = make_shared<SFAsset>(SFASSET_WALL_2);
-  wall3 	     = make_shared<SFAsset>(SFASSET_WALL_3);
-
-
-
   lose       = make_shared<SFAsset>(SFASSET_LOSE);
   win        = make_shared<SFAsset>(SFASSET_WIN);
   intro      = make_shared<SFAsset>(SFASSET_INTRO);

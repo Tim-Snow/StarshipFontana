@@ -129,7 +129,6 @@ void SFApp::OnEvent(SFEvent& event) {
         is_running = false;
         break;
       case SFEVENT_UPDATE:
-        OnUpdateWorld();
         OnRender(3);
         break;
       }
